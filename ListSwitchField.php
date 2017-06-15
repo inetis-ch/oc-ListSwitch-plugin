@@ -95,7 +95,7 @@ class ListSwitchField
         $modelClass = str_replace('\\', '\\\\', get_class($this->record));
 
         $data = [
-            "id: {$this->record->id}",
+            "id: {$this->record->{$this->record->getKeyName()}}",
             "field: '$this->name'",
             "model: '$modelClass'"
         ];
