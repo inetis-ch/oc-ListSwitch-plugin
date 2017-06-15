@@ -48,7 +48,7 @@ class Plugin extends PluginBase
     {
         Event::listen('backend.list.extendColumns', function ($widget) {
             foreach ($widget->config->columns as $name => $config) {
-                if ($config['type'] !== 'inetis-list-switch') {
+                if (empty($config['type']) || $config['type'] !== 'inetis-list-switch') {
                     continue;
                 }
 
