@@ -94,11 +94,17 @@ class ListSwitchField
     {
         $modelClass = str_replace('\\', '\\\\', get_class($this->record));
 
-        return implode(', ', [
+        $data = [
             "id: {$this->record->id}",
             "field: '$this->name'",
             "model: '$modelClass'"
-        ]);
+        ];
+
+        if (post('page')) {
+            $data[] = "page: " . post('page');
+        }
+
+        return implode(', ', $data);
     }
 
     /**
