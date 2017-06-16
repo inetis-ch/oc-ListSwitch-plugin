@@ -54,13 +54,19 @@ class Plugin extends PluginBase
                 // Store field config here, before that unofficial fields was removed
                 ListSwitchField::storeFieldConfig($name, $config);
 
+                $column = [
+                    'clickable' => false,
+                    'type'      => 'inetis-list-switch'
+                ];
+
+                if (isset($config['label'])) {
+                    $column['label'] = $config['label'];
+                }
+
                 // Set this column not clickable
                 // if other column with same field name exists configs are merged
                 $widget->addColumns([
-                    $name => [
-                        'clickable' => false,
-                        'type'      => 'inetis-list-switch'
-                    ]
+                    $name => $column
                 ]);
             }
         });
