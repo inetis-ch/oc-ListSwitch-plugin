@@ -10,7 +10,6 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
-
     /**
      * Returns information about this plugin.
      *
@@ -19,8 +18,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'List Switch',
-            'description' => 'Add support of clickable switch in backend list',
+            'name'        => 'inetis.listswitch::lang.inetis.plugin.name',
+            'description' => 'inetis.listswitch::lang.inetis.plugin.description',
             'author'      => 'inetis',
             'icon'        => 'icon-toggle-on',
             'homepage'    => 'https://github.com/inetis-ch/oc-ListSwitch'
@@ -94,5 +93,4 @@ class Plugin extends PluginBase
             });
         });
     }
-
 }
