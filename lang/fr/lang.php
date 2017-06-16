@@ -1,8 +1,8 @@
 <?php return [
     'inetis' => [
         'plugin' => [
-            'name'        => 'List Switch',
-            'description' => 'Add support of clickable switch in backend list.',
+            'name'        => 'Liste Switch',
+            'description' => "Ajoute la possibilité de créer des boutons dans les listes de l'administration qui inversent la valeur d'un champ.",
         ],
         'listswitch' => [
             'title_true'  => 'Cliquez pour passer le statut à Non',
