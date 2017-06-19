@@ -2,7 +2,7 @@
     'inetis' => [
         'plugin' => [
             'name'        => 'List Switch',
-            'description' => 'Add the possibility to create buttons in backend lists that reverse the value of a field.',
+            'description' => 'Add the possibility to create buttons in backend lists that toggle a model property.',
         ],
         'listswitch' => [
             'title_true'  => 'Click to switch to No',

@@ -1,5 +1,5 @@
 # ListSwitch
-This OctoberCMS plugin add the possibility to create button in backend list that reverse the value of the field.
+This OctoberCMS plugin add the possibility to create buttons in backend lists that toggle a model property.
 That allow you to create a publish / unpublish button on the lists backend (see bellow for demo).
 
 ## Setup
