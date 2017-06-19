@@ -1,9 +1,11 @@
-# ListSwitch
+# List Switch
 This OctoberCMS plugin add the possibility to create buttons in backend lists that toggle a model property.
 That allow you to create a publish / unpublish button on the lists backend (see bellow for demo).
 
-## Setup
-For add this feature to your list you just need to edit the `columns.yaml` field of your model.
+## Usage
+For add this feature to a list, you just need to set the type `inetis-list-switch` in the `columns.yaml` field of your model.
+
+For an advanced usage, see example below :
 ```yaml
 your_field:
     label: 'Your Label'
