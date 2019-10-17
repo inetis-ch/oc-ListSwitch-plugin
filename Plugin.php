@@ -22,7 +22,7 @@ class Plugin extends PluginBase
             'description' => 'inetis.listswitch::lang.inetis.plugin.description',
             'author'      => 'inetis',
             'icon'        => 'icon-toggle-on',
-            'homepage'    => 'https://github.com/inetis-ch/oc-ListSwitch'
+            'homepage'    => 'https://github.com/inetis-ch/oc-ListSwitch',
         ];
     }
 
@@ -34,7 +34,7 @@ class Plugin extends PluginBase
     public function registerListColumnTypes()
     {
         return [
-            'inetis-list-switch' => [ListSwitchField::class, 'render']
+            'inetis-list-switch' => [ListSwitchField::class, 'render'],
         ];
     }
 
@@ -46,6 +46,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::listen('backend.list.extendColumns', function ($widget) {
+            /** @var \Backend\Widgets\Lists $widget */
             foreach ($widget->config->columns as $name => $config) {
                 if (empty($config['type']) || $config['type'] !== 'inetis-list-switch') {
                     continue;
@@ -54,19 +55,10 @@ class Plugin extends PluginBase
                 // Store field config here, before that unofficial fields was removed
                 ListSwitchField::storeFieldConfig($name, $config);
 
-                $column = [
-                    'clickable' => false,
-                    'type'      => 'inetis-list-switch'
-                ];
-
-                if (isset($config['label'])) {
-                    $column['label'] = $config['label'];
-                }
-
-                // Set this column not clickable
-                // if other column with same field name exists configs are merged
                 $widget->addColumns([
-                    $name => $column
+                    $name => array_merge($config, [
+                        'clickable' => false,
+                    ]),
                 ]);
             }
         });
@@ -76,7 +68,7 @@ class Plugin extends PluginBase
          * @return void
          */
         Controller::extend(function ($controller) {
-
+            /** @var Controller $controller */
             $controller->addDynamicMethod('index_onSwitchInetisListField', function () use ($controller) {
 
                 $field = post('field');
