@@ -2,3 +2,6 @@
 1.0.2:
     - Display correctly the column label
     - Add Hungarian translation
+1.0.3:
+    - Preserve column configs
+    - Add Russian translation
