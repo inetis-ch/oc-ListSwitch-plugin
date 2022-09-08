@@ -2,7 +2,7 @@
 
 use Backend\Classes\ListColumn;
 use Lang;
-use Model;
+use October\Rain\Database\Model;
 
 class ListSwitchField
 {
@@ -40,7 +40,7 @@ class ListSwitchField
      *
      * @return string HTML
      */
-    public static function render($value, ListColumn $column, Model $record)
+    public static function render($value, ListColumn $column, $record)
     {
         $field = new self($value, $column, $record);
         $config = $field->getConfig();
@@ -63,7 +63,7 @@ class ListSwitchField
      * @param ListColumn $column
      * @param Model      $record
      */
-    public function __construct($value, ListColumn $column, Model $record)
+    public function __construct($value, ListColumn $column, $record)
     {
         $this->name = $column->columnName;
         $this->value = $value;

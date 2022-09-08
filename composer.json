@@ -1,0 +1,9 @@
+{
+    "name": "inetis/listswitch-plugin",
+    "description": "Add the possibility to create buttons in backend lists that toggle a model property.",
+    "type": "october-plugin",
+    "licence": "MIT",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
