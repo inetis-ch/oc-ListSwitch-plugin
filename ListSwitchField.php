@@ -20,6 +20,10 @@ class ListSwitchField
         'request'    => 'onSwitchInetisListField'
     ];
 
+    private $name;
+    private $value;
+    private $column;
+    private $record;
     private static $listConfig = [];
 
     /**
