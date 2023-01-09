@@ -24,18 +24,7 @@ class ListSwitchField
     private $value;
     private $column;
     private $record;
-    private static $listConfig = [];
-
-    /**
-     * @param       $field
-     * @param array $config
-     *
-     * @internal param $name
-     */
-    public static function storeFieldConfig($field, array $config)
-    {
-        self::$listConfig[$field] = array_merge(self::$defaultFieldConfig, $config, ['name' => $field]);
-    }
+    private $config;
 
     /**
      * @param            $value
@@ -73,6 +62,8 @@ class ListSwitchField
         $this->value = $value;
         $this->column = $column;
         $this->record = $record;
+
+        $this->config = array_merge(self::$defaultFieldConfig, $column->config);
     }
 
     /**
@@ -82,11 +73,7 @@ class ListSwitchField
      */
     private function getConfig($config = null)
     {
-        if (is_null($config)) {
-            return self::$listConfig[$this->name];
-        }
-
-        return self::$listConfig[$this->name][$config];
+        return data_get($this->config, $config);
     }
 
     /**

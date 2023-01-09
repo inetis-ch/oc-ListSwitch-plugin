@@ -53,9 +53,6 @@ class Plugin extends PluginBase
                     continue;
                 }
 
-                // Store field config here, before that unofficial fields was removed
-                ListSwitchField::storeFieldConfig($name, $listColumn->config);
-
                 $widget->addColumns([
                     $name => array_merge($listColumn->config, [
                         'clickable' => false,
