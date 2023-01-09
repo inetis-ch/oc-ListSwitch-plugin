@@ -47,16 +47,17 @@ class Plugin extends PluginBase
     {
         Event::listen('backend.list.extendColumns', function ($widget) {
             /** @var \Backend\Widgets\Lists $widget */
-            foreach ($widget->config->columns as $name => $config) {
-                if (empty($config['type']) || $config['type'] !== 'inetis-list-switch') {
+            /** @var \Backend\Classes\ListColumn $listColumn */
+            foreach ($widget->getColumns() as $name => $listColumn) {
+                if (data_get($listColumn, 'config.type') !== 'inetis-list-switch') {
                     continue;
                 }
 
                 // Store field config here, before that unofficial fields was removed
-                ListSwitchField::storeFieldConfig($name, $config);
+                ListSwitchField::storeFieldConfig($name, $listColumn->config);
 
                 $widget->addColumns([
-                    $name => array_merge($config, [
+                    $name => array_merge($listColumn->config, [
                         'clickable' => false,
                     ]),
                 ]);
