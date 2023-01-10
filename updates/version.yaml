@@ -8,3 +8,9 @@
 1.0.4:
     - Add a composer.json file
     - Use weaker typing to prevent compatibility issues when mixing Model facades
+1.1.0:
+    - Add support for lists in relation widget inside a form
+    - Fix conflict with Tailor on October 3
+    - Fix compatibility with PHP 8.2
+    - Fix issues when adding columns dynamically to a Lists widget
+    - Removed some legacy code
