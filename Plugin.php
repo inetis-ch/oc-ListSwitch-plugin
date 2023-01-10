@@ -1,8 +1,9 @@
 <?php namespace Inetis\ListSwitch;
 
+use ApplicationException;
+use Backend\Behaviors\RelationController;
 use Backend\Classes\Controller;
 use Event;
-use Flash;
 use System\Classes\PluginBase;
 
 /**
@@ -40,8 +41,6 @@ class Plugin extends PluginBase
 
     /**
      * Boot method, called right before the request route.
-     *
-     * @return array
      */
     public function boot()
     {
@@ -63,30 +62,42 @@ class Plugin extends PluginBase
 
         /**
          * Switch a boolean value of a model field
-         * @return void
          */
         Controller::extend(function ($controller) {
             /** @var Controller $controller */
             $controller->addDynamicMethod('index_onSwitchInetisListField', function () use ($controller) {
-
-                $field = post('field');
-                $id = post('id');
-                $modelClass = post('model');
-
-                if (empty($field) || empty($id) || empty($modelClass)) {
-                    Flash::error('Following parameters are required : id, field, model');
-
-                    return;
-                }
-
-                $model = new $modelClass;
-                $item = $model::find($id);
-                $item->{$field} = !$item->{$field};
-
-                $item->save();
+                $this->processInvertField(post('model'), post('id'), post('field'));
 
                 return $controller->listRefresh($controller->primaryDefinition);
             });
+
+            $controller->addDynamicMethod('onSwitchInetisListField', function ($recordId) use ($controller) {
+                $this->processInvertField(post('model'), post('id'), post('field'));
+
+                if ($controller->isClassExtendedWith(RelationController::class)) {
+                    $controller->initForm($controller->formFindModelObject($recordId));
+
+                    return $controller->relationRefresh(post('_relation_field'));
+                }
+            });
         });
+    }
+
+    /**
+     * Invert a model field's value
+     *
+     * @param string $modelClass
+     * @param int $id
+     * @param string $fieldName
+     */
+    private function processInvertField($modelClass, $id, $fieldName)
+    {
+        if (empty($fieldName) || empty($id) || empty($modelClass)) {
+            throw new ApplicationException("Following parameters are required : id, field, model");
+        }
+
+        $item = $modelClass::findOrFail($id);
+        $item->{$fieldName} = !$item->{$fieldName};
+        $item->save();
     }
 }
