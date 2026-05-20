@@ -14,3 +14,5 @@
     - Fix compatibility with PHP 8.2
     - Fix issues when adding columns dynamically to a Lists widget
     - Removed some legacy code
+1.1.1:
+    - Allow composer/installers v2 (improve php 8.4 compatibility)
